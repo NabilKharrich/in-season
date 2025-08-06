@@ -1,5 +1,3 @@
-import "swiper/css";
-
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { products } from "./data/products.ts";
 import { months } from "./data/months.ts";
@@ -8,7 +6,7 @@ import Swiper from "swiper";
 import { FreeMode } from "swiper/modules";
 
 function App() {
-    const sliderRef = useRef<HTMLElement>(null);
+    const sliderRef = useRef<HTMLDivElement>(null);
     const [fruit, setFruit] = useState(() => [...products.frutta]);
     const [veggies, setVeggies] = useState(() => [...products.verdura]);
     const [selectedMonth, setSelectedMonth] = useState(
@@ -75,7 +73,7 @@ function App() {
         };
     }, [handleInit]);
 
-    const handleMonthClick = (month) => {
+    const handleMonthClick = (month: (typeof months)[number]) => {
         setSelectedMonth(month);
     };
 
@@ -88,12 +86,9 @@ function App() {
                         Welcome
                         <br /> back, Nabil
                     </span>
-                    <span className="text-sm text-neutral-500">
-                        {selectedMonth.nome}
-                    </span>
                 </div>
-                <hr className="border-t border-neutral-300" />
-                <div className="flex gap-2 -mt-1 overflow-auto">
+
+                <div className="flex gap-2 overflow-auto">
                     <div className="swiper" ref={sliderRef}>
                         <div className="swiper-wrapper">
                             {months.map((month) => (
